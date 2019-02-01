@@ -1,10 +1,8 @@
 # Installation Guide
 
-If you want to install GDAL at Ubuntu 18.04 Server is not available yet at the repository, so we are going to install it at 16.04.
+This guide will hopefully get you set up with Oracle JRE 8, Tomcat 9, GeoServer 2.11.1, and GDAL 2.2 on Ubuntu 16.04 Server.
 
-This guide will hopefully get you set up with Oracle JRE 8, Tomcat 9, GeoServer 2.14.2, and GDAL 2.2 on **Ubuntu 16.04 Server**.
-
-In my case I am running this tutorial in a VMWare on IP address 192.168.34.10, you may have a different IP you need to substitute.
+In my case I am running this tutorial in a VirtualBox VM on IP address 192.168.34.10, you may have a different IP you need to substitute.
 
 ## Install Java
 
@@ -14,9 +12,9 @@ $ sudo apt update
 $ sudo apt install oracle-java8-installer
 $ sudo apt install oracle-java8-set-default
 $ java -version
-java version "1.8.0_201"
-Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
-Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)
+java version "1.8.0_144"
+Java(TM) SE Runtime Environment (build 1.8.0_144-b01)
+Java HotSpot(TM) 64-Bit Server VM (build 25.144-b01, mixed mode)
 ```
 
 If there is a hash mismatch error during installation, you have to manually download Java for the installer. URL can be found on [Oracle's Java download site](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html). Manual fix below:
@@ -28,9 +26,9 @@ $ sudo wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://d
 $ sudo apt install oracle-java8-installer
 $ sudo apt install oracle-java8-set-default
 $ java -version
-java version "1.8.0_201"
-Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
-Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)
+java version "1.8.0_144"
+Java(TM) SE Runtime Environment (build 1.8.0_144-b01)
+Java HotSpot(TM) 64-Bit Server VM (build 25.144-b01, mixed mode)
 ```
 
 ## Install Tomcat9
@@ -38,9 +36,9 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)
 ```sh
 $ mkdir ~/src
 $ cd ~/src
-$ wget http://apache.mirror.iweb.ca/tomcat/tomcat-9/v9.0.14/bin/apache-tomcat-9.0.14.tar.gz
-$ tar xzf apache-tomcat-9.0.14.tar.gz
-$ sudo cp -r apache-tomcat-9.0.14 /opt/tomcat9
+$ wget http://apache.mirror.iweb.ca/tomcat/tomcat-9/v9.0.0.M26/bin/apache-tomcat-9.0.0.M26.tar.gz
+$ tar xzf apache-tomcat-9.0.0.M26.tar.gz
+$ sudo cp -r apache-tomcat-9.0.0.M26 /opt/tomcat9
 $ sudo useradd tomcat9
 $ sudo usermod -s /bin/false tomcat9
 $ sudo chown -R tomcat9 /opt/tomcat9
@@ -56,7 +54,7 @@ $ sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
 $ sudo apt upgrade
 $ sudo apt install gdal-bin libgdal-dev libgdal-java libgdal20 gdal-data
 $ gdalinfo --version
-GDAL 1.11.3, released 2015/09/16
+GDAL 2.2.1, released 2017/06/23
 ```
 
 ## Install GeoServer
@@ -80,9 +78,9 @@ Instructions based on [GeoServer documentation](http://docs.geoserver.org/latest
 
 ```sh
 $ cd ~/src
-$ wget http://sourceforge.net/projects/geoserver/files/GeoServer/2.14.2/extensions/geoserver-2.14.2-gdal-plugin.zip
-$ unzip geoserver-2.14.2-gdal-plugin.zip -d geoserver-2.14.2-gdal-plugin
-$ sudo cp geoserver-2.14.2-gdal-plugin/*.jar /opt/tomcat9/webapps/geoserver/WEB-INF/lib/.
+$ wget http://sourceforge.net/projects/geoserver/files/GeoServer/2.11.1/extensions/geoserver-2.11.1-gdal-plugin.zip
+$ unzip geoserver-2.11.1-gdal-plugin.zip -d geoserver-2.11.1-gdal-plugin
+$ sudo cp geoserver-2.11.1-gdal-plugin/*.jar /opt/tomcat9/webapps/geoserver/WEB-INF/lib/.
 $ sudo cp /usr/share/java/gdal.jar /opt/tomcat9/webapps/geoserver/WEB-INF/lib/.
 $ sudo chown -R tomcat9 /opt/tomcat9
 ```
